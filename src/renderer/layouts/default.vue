@@ -8,15 +8,17 @@
         <popup/>
         <auto-updater/>
         <update-checker/>
+        <debug-chin/>
     </div>
 </template>
 
 <script>
 import appNavbar from "~/components/app/navbar.vue";
 import updateChecker from "~/components/updateChecker.vue";
+import debugChin from "~/components/app/debugChin.vue";
 
 export default {
-    components: {appNavbar, updateChecker},
+    components: {appNavbar, updateChecker, debugChin},
     data: () => ({
         activeSidebar: false,
     }),

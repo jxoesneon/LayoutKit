@@ -24,7 +24,9 @@ yarn-error.log
 
 # Temporary files
 progress.txt
-screenshots/
+
+# Local tool repos / build outputs
+external/
 
 # Editor files
 .vscode/

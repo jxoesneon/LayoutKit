@@ -5,8 +5,9 @@ export const state = () => ({
     ftpPort: 5000,
     ftpUsername: "nxthemer",
     ftpPassword: "nxthemer",
-    checkToolUpdatesOnLaunch: true,
+    checkToolUpdatesOnLaunch: process.platform === "win32",
     preferredEditor: "toolbox",
+    debugMode: false,
 });
 
 export const mutations = {
@@ -33,5 +34,8 @@ export const mutations = {
     },
     PREFERRED_EDITOR(state: any, value: string) {
         state.preferredEditor = value;
+    },
+    DEBUG_MODE(state: any, value: boolean) {
+        state.debugMode = value;
     },
 };

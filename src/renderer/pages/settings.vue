@@ -110,6 +110,15 @@
                                 <vs-switch v-model="checkToolUpdatesOnLaunch"/>
                             </template>
                         </vse-list-item>
+                        <h3>Debugging</h3>
+                        <vse-list-item>
+                            <template #description>
+                                Debug Mode
+                            </template>
+                            <template #button>
+                                <vs-switch v-model="debugMode"/>
+                            </template>
+                        </vse-list-item>
                     </vse-list>
                 </template>
             </vse-card>
@@ -197,6 +206,14 @@ export default {
             },
             set(value) {
                 this.$store.commit("settings/PREFERRED_EDITOR", value);
+            },
+        },
+        debugMode: {
+            get() {
+                return this.$store.state.settings.debugMode;
+            },
+            set(value) {
+                this.$store.commit("settings/DEBUG_MODE", value);
             },
         },
     },

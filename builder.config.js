@@ -1,5 +1,5 @@
 require("dotenv").config();
-const ICONS_DIR = "build/icons/";
+const ICONS_DIR = "build/";
 
 const windowsOS = {
     win: {
@@ -15,10 +15,18 @@ const windowsOS = {
     },
 };
 
+const macOS = {
+    mac: {
+        icon: ICONS_DIR + "icon.icns",
+        target: ["dmg"],
+        minimumSystemVersion: "11.7.10",
+    },
+};
+
 module.exports = {
     productName: "LayoutKit",
     appId: "net.themezer.layoutkit",
-    artifactName: "setup-${version}.${ext}",
+    artifactName: "${productName}-${version}.${ext}",
     directories: {
         output: "build",
     },
@@ -37,5 +45,40 @@ module.exports = {
             to: "dist/renderer/",
         },
     ],
+    extraResources: [
+        {
+            from: "external/SwitchThemeInjector/SwitchThemes.CLI/bin/Release/net8.0/osx-x64/publish",
+            to: "tools/switchthemes-cli/",
+        },
+        {
+            from: "external/SwitchThemeInjector/SwitchThemes.CLI/bin/Release/net8.0/osx-arm64/publish",
+            to: "tools/switchthemes-cli-arm64/",
+        },
+        {
+            from: "external/SARC-Tool",
+            to: "tools/sarc-tool/",
+            filter: ["main.py", "README.md", "LICENSE", ".gitignore", "Pipfile", "Pipfile.lock"],
+        },
+        {
+            from: "external/Switch-Toolbox.Avalonia/bin/Release/net8.0/osx-x64/publish",
+            to: "tools/toolbox-avalonia/",
+        },
+        {
+            from: "external/Switch-Toolbox.Avalonia/bin/Release/net8.0/osx-arm64/publish",
+            to: "tools/toolbox-avalonia-arm64/",
+        },
+        {
+            from: "external/SwitchLayoutEditor.Avalonia/bin/Release/net8.0/osx-x64/publish",
+            to: "tools/layouteditor-avalonia/",
+        },
+        {
+            from: "external/SwitchLayoutEditor.Avalonia/bin/Release/net8.0/osx-arm64/publish",
+            to: "tools/layouteditor-avalonia-arm64/",
+        },
+    ],
+    asarUnpack: [
+        "**/node_modules/7zip-bin/**/*"
+    ],
     ...windowsOS,
+    ...macOS,
 };

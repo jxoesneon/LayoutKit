@@ -8,7 +8,7 @@
 LayoutKit is a tool that makes it easier to create Nintendo Switch layouts.
 </p>
 <p align="center">
-    <a href="https://ko-fi.com/Q5Q47KAM3"><img height="20" src="https://ko-fi.com/img/githubbutton_sm.svg" alt="ko-fi" /></a>
+    <a href="https://ko-fi.com/jxoesneon"><img height="20" src="https://ko-fi.com/img/githubbutton_sm.svg" alt="ko-fi" /></a>
     <a href="https://github.com/ThemezerNX/LayoutKit/releases"><img height="20" src="https://img.shields.io/github/downloads/ThemezerNX/LayoutKit/total.svg" alt="download count badge" /></a>
 </p>
 
@@ -25,7 +25,10 @@ LayoutKit is a tool that makes it easier to create Nintendo Switch layouts.
 
 ### **Requirements**
 
-- Windows
+- macOS (builds and runs)
+- .NET 8 SDK (for development/building native CLI; packaged CLI is included at runtime)
+- Pipenv (required for native SARC-Tool Python environment on macOS)
+- GUI editors (Switch Toolbox, Switch Layout Editor) are not supported natively on macOS. Use Windows or Wine/CrossOver. CLI tools run natively (SwitchThemes CLI; SARC-Tool via Pipenv).
 
 ### **Steps**
 
@@ -33,6 +36,8 @@ LayoutKit is a tool that makes it easier to create Nintendo Switch layouts.
 2. Follow the steps in [LayoutDocs](https://layoutdocs.themezer.net/guide/).
 
 ## **Included in this kit** 📜
+
+LayoutKit (macOS edition) is developed and maintained by ThemezerNX. LayoutKit was originally created by Migushthe2nd; this repository contains the macOS implementation and packaging. The tools below are included for convenience and remain credited to their respective authors.
 
 - [Switch Toolbox](https://github.com/KillzXGaming/Switch-Toolbox) by @KillzXGaming
 - [SwitchLayoutEditor](https://github.com/FuryBaguette/SwitchLayoutEditor) by @FuryBaguette and @exelix11
@@ -55,9 +60,9 @@ LayoutKit is a tool that makes it easier to create Nintendo Switch layouts.
 ## **Build Commands** 💻
 
 ``` bash
-# install dependencies
+# install dependencies and build icons
 yarn
-yarn global add electron-icon-builder
+yarn run build:icons
 
 # serve app with hot reload
 yarn run dev
@@ -68,7 +73,7 @@ yarn run build
 
 ## **Special Thanks** ❤️
 
-Special thanks to the awesome people who created the awesome tools above!
+Special thanks to Migushthe2nd for the original LayoutKit project, and to the authors of the tools listed above.
 
 ---
 

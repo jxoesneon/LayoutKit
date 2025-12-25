@@ -62,7 +62,7 @@
         </vs-col>
         <vse-footer class="px-10" fixed shadow style="height: 84px">
             <p class="center">
-                v{{ applicationVersion }} - Made with {{ randomEmoji }} by
+                v{{ applicationVersion }} - macOS edition made with {{ randomEmoji }} by
                 <a href="#" @click.prevent="$ipcService.system.openUrl('https://github.com/ThemezerNX')">
                     ThemezerNX</a>
             </p>
@@ -70,6 +70,9 @@
                 Source code available on
                 <a href="#" @click.prevent="$ipcService.system.openUrl('https://github.com/ThemezerNX/LayoutKit')">
                     GitHub</a>
+                - Original LayoutKit by
+                <a href="#" @click.prevent="$ipcService.system.openUrl('https://github.com/Migushthe2nd')">
+                    Migushthe2nd</a>
                 - For support join the
                 <a href="#" @click.prevent="$ipcService.system.openUrl('https://discord.gg/nnm8wyM')">
                     Discord server

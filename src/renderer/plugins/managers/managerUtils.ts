@@ -8,13 +8,16 @@ const VERSION_CFG = "ver.cfg";
 const TOOLS_DIR = "tools";
 
 const SARCTOOL_DIR = "sarctool";
-const SARCTOOL_EXE = "sarc_tool.exe";
 const THEMEINJECTOR_DIR = "themeinjector";
-const THEMEINJECTOR_EXE = "SwitchThemes.exe";
 const TOOLBOX_DIR = "toolbox";
-const TOOLBOX_EXE = "Toolbox.exe";
 const LAYOUTEDITOR_DIR = "layouteditor";
-const LAYOUTEDITOR_EXE = "Switch Layout Editor.exe";
+
+const exeName = (base) => process.platform === "win32" ? `${base}.exe` : base;
+
+const SARCTOOL_EXE = exeName("sarc_tool");
+const THEMEINJECTOR_EXE = exeName("SwitchThemes");
+const TOOLBOX_EXE = exeName("Toolbox");
+const LAYOUTEDITOR_EXE = exeName("Switch Layout Editor");
 
 const getDirectories = source =>
     fs.readdirSync(source, {withFileTypes: true})
