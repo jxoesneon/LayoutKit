@@ -3,3 +3,32 @@
 /build/
 node_modules
 .env
+
+# macOS
+.DS_Store
+
+# Logs
+*.log
+yarn-error.log
+
+# Yarn
+.yarn/
+.yarn-error.log
+
+# Node binaries
+.node/
+.node-x64/
+
+# Electron-Nuxt
+.electron-nuxt/
+
+# Temporary files
+progress.txt
+screenshots/
+
+# Editor files
+.vscode/
+.idea/
+
+# OS files
+Thumbs.db
