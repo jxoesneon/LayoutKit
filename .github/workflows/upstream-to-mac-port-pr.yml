@@ -1,0 +1,62 @@
+name: PR upstream updates into mac-port
+
+"on":
+  schedule:
+    - cron: "27 9 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pull-requests: write
+
+concurrency:
+  group: upstream-to-mac-port
+  cancel-in-progress: true
+
+jobs:
+  pr-upstream:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Create/update PR and enable auto-merge
+        env:
+          GH_TOKEN: ${{ github.token }}
+          UPSTREAM_REPO: ThemezerNX/LayoutKit
+          BASE_BRANCH: mac-port
+          SYNC_BRANCH: automation/upstream-sync
+        run: |
+          set -euo pipefail
+
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+          git remote add upstream "https://github.com/${UPSTREAM_REPO}.git" || true
+          git fetch --prune upstream main
+          git fetch --prune origin "${BASE_BRANCH}"
+
+          git checkout -B "${SYNC_BRANCH}" "origin/${BASE_BRANCH}"
+
+          if ! git merge --no-edit "upstream/main"; then
+            echo "Merge conflict while merging upstream/main into ${BASE_BRANCH}."
+            exit 1
+          fi
+
+          ahead_count="$(git rev-list --count "origin/${BASE_BRANCH}..HEAD")"
+          if [ "${ahead_count}" = "0" ]; then
+            echo "No upstream changes to apply."
+            exit 0
+          fi
+
+          git push origin "${SYNC_BRANCH}" --force-with-lease
+
+          pr_number="$(gh pr list --state open --base "${BASE_BRANCH}" --head "${SYNC_BRANCH}" --json number --jq '.[0].number' || true)"
+
+          if [ -z "${pr_number}" ]; then
+            pr_url="$(gh pr create --base "${BASE_BRANCH}" --head "${SYNC_BRANCH}" --title "Sync upstream main" --body "Automated daily sync from upstream (ThemezerNX/LayoutKit:main) into mac-port." )"
+            pr_number="$(gh pr view "${pr_url}" --json number --jq '.number')"
+          fi
+
+          gh pr merge "${pr_number}" --merge --auto --delete-branch
