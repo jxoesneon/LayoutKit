@@ -69,6 +69,6 @@
         "7zip-bin": "^5.1.1",
         "electron-updater": "^4.3.9",
         "electron-window-state": "^5.0.3",
-        "nuxt": "^2.15.3"
+        "nuxt": "^4.6.2"
     }
 }
